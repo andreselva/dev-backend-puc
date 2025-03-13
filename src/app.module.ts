@@ -20,6 +20,8 @@ import GetPlanUseCase from './Management/Plans/UseCases/GetPlanUseCase';
 import GetCustomerUseCase from './Management/Customers/UseCases/GetCustomerUseCase';
 import UpdatePricePlanUseCase from './Management/Plans/UseCases/UpdatePricePlanUseCase';
 import GetSubscriptionByStatusUseCase from './Management/Subscriptions/UseCases/GetSubscriptionByStatus';
+import GetSubscriptionsByClientIdUseCase from './Management/Subscriptions/UseCases/GetSubscriptionsByClientIdUseCase';
+import GetSubscriptionsByPlanIdUseCase from './Management/Subscriptions/UseCases/GetSubscriptionByPlanIdUseCase';
 
 const planUseCases = [
   GetPlanUseCase,
@@ -36,7 +38,9 @@ const customerUseCases = [
 const subscriptionUseCases = [
   ListSubscriptionUseCase,
   CreateSubscriptionUseCase,
-  GetSubscriptionByStatusUseCase
+  GetSubscriptionByStatusUseCase,
+  GetSubscriptionsByClientIdUseCase,
+  GetSubscriptionsByPlanIdUseCase
 ]
 
 const useCases = [

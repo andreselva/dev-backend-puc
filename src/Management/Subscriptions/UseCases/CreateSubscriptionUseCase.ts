@@ -24,12 +24,8 @@ export default class CreateSubscriptionUseCase {
         const codeChecked = this.planService.getPlan(dto.codePlan);
         const customerChecked = this.customerService.getCustomer(dto.codeCustomer);
 
-        if (!codeChecked) {
+        if (!codeChecked || !customerChecked) {
             throw new Error("Plano inexistente!");
-        }
-
-        if (!customerChecked) {
-            throw new Error("Cliente inexistente!");
         }
     }
 }

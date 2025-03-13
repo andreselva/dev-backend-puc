@@ -8,6 +8,6 @@ export default class UpdatePricePlanUseCase {
     constructor(private readonly planRepository: PlanRepository) { }
 
     update(dto: UpdatePricePlanDTO) {
-        this.planRepository.updatePricePlan(dto.code, dto.price);
+        return this.planRepository.updatePricePlan(dto.code, dto.price);
     }
 }

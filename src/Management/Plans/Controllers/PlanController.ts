@@ -2,7 +2,7 @@ import { Body, Controller, Get, Patch, Post } from "@nestjs/common";
 import PlanService from "../Services/PlanService";
 import CreatePlanDTO from "../DTO/CreatePlanDTO";
 import UpdatePricePlanDTO from "../DTO/UpdatePricePlanDTO";
-
+import Response from "src/Response/Response";
 @Controller('plans')
 export default class PlanController {
     constructor(
@@ -21,6 +21,7 @@ export default class PlanController {
 
     @Patch('/price')
     updatePricePlan(@Body() dto: UpdatePricePlanDTO) {
-        return this.planService.updatePricePlan(dto);
+        const plan = this.planService.updatePricePlan(dto);
+        return Response.success(plan, "Preço do plano atualizado com sucesso!");
     }
 }

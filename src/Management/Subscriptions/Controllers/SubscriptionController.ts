@@ -23,4 +23,14 @@ export default class SubscriptionController {
     getSubscriptionByStatus(@Param('status') status: string) {
         return this.subscriptionService.getSubscriptionByStatus(status);
     }
+
+    @Get('/client/:clientId')
+    getSubscriptionsByClientId(@Param('clientId') clientId: string) {
+        return this.subscriptionService.getSubscriptionsByClientId(clientId);
+    }
+
+    @Get('/plan/:planId')
+    getSubscriptionsByPlanId(@Param('planId') planId: string) {
+        return this.subscriptionService.getSubscriptionsByPlanId(planId);
+    }
 }
