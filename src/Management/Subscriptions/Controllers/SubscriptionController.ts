@@ -1,4 +1,4 @@
-import { Body, Controller, Dependencies, Get, Post } from "@nestjs/common";
+import { Body, Controller, Dependencies, Get, Param, Post } from "@nestjs/common";
 import SubscriptionsService from "../Services/SubscriptionsService";
 import SubscriptionDTO from "../DTO/SubscriptionDTO";
 
@@ -14,8 +14,13 @@ export default class SubscriptionController {
         return this.subscriptionService.listSubscriptions();
     }
 
-    @Post() 
+    @Post()
     createSubscription(@Body() dto: SubscriptionDTO) {
         return this.subscriptionService.createSubscription(dto);
+    }
+
+    @Get('/status/:status')
+    getSubscriptionByStatus(@Param('status') status: string) {
+        return this.subscriptionService.getSubscriptionByStatus(status);
     }
 }

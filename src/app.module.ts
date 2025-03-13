@@ -19,6 +19,44 @@ import CreateSubscriptionUseCase from './Management/Subscriptions/UseCases/Creat
 import GetPlanUseCase from './Management/Plans/UseCases/GetPlanUseCase';
 import GetCustomerUseCase from './Management/Customers/UseCases/GetCustomerUseCase';
 import UpdatePricePlanUseCase from './Management/Plans/UseCases/UpdatePricePlanUseCase';
+import GetSubscriptionByStatusUseCase from './Management/Subscriptions/UseCases/GetSubscriptionByStatus';
+
+const planUseCases = [
+  GetPlanUseCase,
+  ListPlansUseCase,
+  CreatePlanUseCase,
+  UpdatePricePlanUseCase,
+];
+
+const customerUseCases = [
+  GetCustomerUseCase,
+  ListCustomersUseCase,
+]
+
+const subscriptionUseCases = [
+  ListSubscriptionUseCase,
+  CreateSubscriptionUseCase,
+  GetSubscriptionByStatusUseCase
+]
+
+const useCases = [
+  ...planUseCases,
+  ...customerUseCases,
+  ...subscriptionUseCases,
+]
+
+const repositories = [
+  PlanRepository,
+  CustomerRepository,
+  SubscriptionsRepository,
+]
+
+const services = [
+  AppService,
+  PlanService,
+  CustomerService,
+  SubscriptionsService,
+]
 
 @Module({
   imports: [],
@@ -29,21 +67,9 @@ import UpdatePricePlanUseCase from './Management/Plans/UseCases/UpdatePricePlanU
     SubscriptionController
   ],
   providers: [
-    AppService,
-    PlanService,
-    PlanRepository,
-    ListPlansUseCase,
-    CreatePlanUseCase,
-    GetPlanUseCase,
-    UpdatePricePlanUseCase,
-    CustomerRepository,
-    CustomerService,
-    ListCustomersUseCase,
-    GetCustomerUseCase,
-    SubscriptionsRepository,
-    SubscriptionsService,
-    ListSubscriptionUseCase,
-    CreateSubscriptionUseCase,
+    ...services,
+    ...repositories,
+    ...useCases,
   ],
 })
 
