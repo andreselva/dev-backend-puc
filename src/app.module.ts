@@ -22,6 +22,7 @@ import UpdatePricePlanUseCase from './Management/Plans/UseCases/UpdatePricePlanU
 import GetSubscriptionByStatusUseCase from './Management/Subscriptions/UseCases/GetSubscriptionByStatus';
 import GetSubscriptionsByClientIdUseCase from './Management/Subscriptions/UseCases/GetSubscriptionsByClientIdUseCase';
 import GetSubscriptionsByPlanIdUseCase from './Management/Subscriptions/UseCases/GetSubscriptionByPlanIdUseCase';
+import { DatabaseService } from './Database/DatabaseService';
 
 const planUseCases = [
   GetPlanUseCase,
@@ -74,6 +75,7 @@ const services = [
     ...services,
     ...repositories,
     ...useCases,
+    DatabaseService
   ],
 })
 

@@ -1,19 +1,32 @@
-import { Injectable } from "@nestjs/common";
+import { Dependencies, Injectable } from "@nestjs/common";
 import Customer from "../Entity/Customer";
+import { DatabaseService } from "src/Database/DatabaseService";
 
 @Injectable()
+@Dependencies(DatabaseService)
 export default class CustomerRepository {
+    constructor(private readonly db: DatabaseService) { }
 
-    private static customers: Customer[] = [
-        new Customer(1, 'João', '(11) 99999-9999'),
-        new Customer(2, 'Maria', '(11) 99999-9999'),
-    ];
-
-    listAllCustomers(): Customer[] {
-        return [...CustomerRepository.customers];
+    async getCustomer(code: string) {
+        const query = 'SELECT * FROM customers WHERE code = ?';
+        const params = [code];
+        const customers = await this.db.select<Customer>(query, params);
+    
+        if (!customers || !Array.isArray(customers) || customers.length === 0) {
+            throw new Error('Cliente não encontrado para o código fornecido!');
+        }
+    
+        return customers[0];
     }
+    
+    async listAllCustomers() {
+        const query = 'SELECT * FROM customers';
+        const customers = await this.db.select<Customer>(query);
 
-    getCustomer(id: number) {
-        return CustomerRepository.customers.find(customer => customer.getCode() === id);
+        if (!customers) {
+            throw new Error('Erro ao buscar os clientes!');
+        }
+
+        return customers;
     }
 }

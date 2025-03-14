@@ -1,5 +1,5 @@
 export default class SubscriptionDTO {
-    code: number;
-    codePlan: number;
-    codeCustomer: number;
+    code: string;
+    codePlan: string;
+    codeCustomer: string;
 }

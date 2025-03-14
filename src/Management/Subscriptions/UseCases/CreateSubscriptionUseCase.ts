@@ -15,17 +15,17 @@ export default class CreateSubscriptionUseCase {
     ) { }
 
     create(dto: SubscriptionDTO) {
-        this.checkExistence(dto);
-        const subscription = new Subscription(dto.code, dto.codePlan, dto.codeCustomer);
+        // this.checkExistence(dto);
+        const subscription = new Subscription(parseInt(dto.code), parseInt(dto.codePlan), parseInt(dto.codeCustomer));
         return this.subscriptionRepository.createSubscription(subscription);
     }
 
-    private checkExistence(dto: SubscriptionDTO) {
-        const codeChecked = this.planService.getPlan(dto.codePlan);
-        const customerChecked = this.customerService.getCustomer(dto.codeCustomer);
+    // private checkExistence(dto: SubscriptionDTO) {
+    //     const codeChecked = this.planService.getPlan(parseInt(dto.codePlan));
+    //     const customerChecked = this.customerService.getCustomer(dto.codeCustomer);
 
-        if (!codeChecked || !customerChecked) {
-            throw new Error("Plano inexistente!");
-        }
-    }
+    //     if (!codeChecked || !customerChecked) {
+    //         throw new Error("Plano inexistente!");
+    //     }
+    // }
 }

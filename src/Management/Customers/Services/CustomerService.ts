@@ -14,7 +14,7 @@ export default class CustomerService {
         return this.listCustomersUseCase.list();
     }
 
-    getCustomer(id: number) {
-        return this.getCustomerUseCase.get(id);
+    getCustomer(code: string) {
+        return this.getCustomerUseCase.get(code);
     }
 }
