@@ -23,16 +23,22 @@ export default class SubscriptionsService {
         private readonly getSubscriptionsByPlanIdUseCase: GetSubscriptionsByPlanIdUseCase
     ) { };
 
-    listSubscriptions() {
-        return this.listSubscriptionUseCase.list();
+    async listSubscriptions() {
+        return await this.listSubscriptionUseCase.list();
     }
 
     async createSubscription(dto: SubscriptionDTO) {
         return this.createSubscriptionUseCase.create(dto);
     }
 
-    getSubscriptionByStatus(status: string) {
-        return this.getSubscriptionByStatusUseCase.get(status);
+    async getSubscriptionByStatus(status: string) {
+        const formattedStatus = status.toUpperCase();
+
+        if (formattedStatus === "TODOS") {
+            return await this.listSubscriptions();
+        }
+
+        return await this.getSubscriptionByStatusUseCase.get(formattedStatus);
     }
 
     getSubscriptionsByClientId(clientId: string) {

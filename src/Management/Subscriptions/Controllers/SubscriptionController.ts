@@ -26,8 +26,14 @@ export default class SubscriptionController {
     }
 
     @Get('/status/:status')
-    getSubscriptionByStatus(@Param('status') status: string) {
-        return this.subscriptionService.getSubscriptionByStatus(status);
+    async getSubscriptionByStatus(@Param('status') status: string) {
+        const subscriptions = await this.subscriptionService.getSubscriptionByStatus(status);
+
+        if (subscriptions && Array.isArray(subscriptions) && subscriptions.length > 0) {
+            return Response.success(subscriptions);
+        }
+
+        return Response.notFound();
     }
 
     @Get('/client/:clientId')

@@ -6,19 +6,6 @@ import { DatabaseService } from "src/Database/DatabaseService";
 @Dependencies(DatabaseService)
 export default class SubscriptionsRepository {
     constructor(private readonly databaseService: DatabaseService) { }
-    private static subscriptions: Subscription[] = [
-        new Subscription(1, 1, 1, new Date('2021-01-01'), new Date('2021-12-31'), 'active', 'credit_card'),
-        new Subscription(1, 1, 1, new Date('2021-01-01'), new Date('2021-12-31'), 'canceled', 'credit_card'),
-        new Subscription(1, 1, 1, new Date('2021-01-01'), new Date('2021-12-31'), 'active', 'credit_card'),
-        new Subscription(1, 1, 1, new Date('2021-01-01'), new Date('2021-12-31'), 'canceled', 'credit_card'),
-        new Subscription(2, 2, 2, new Date('2021-01-01'), new Date('2021-12-31'), 'active', 'credit_card'),
-        new Subscription(2, 2, 2, new Date('2021-01-01'), new Date('2021-12-31'), 'canceled', 'credit_card'),
-        new Subscription(2, 2, 2, new Date('2021-01-01'), new Date('2021-12-31'), 'canceled', 'credit_card'),
-        new Subscription(2, 2, 2, new Date('2021-01-01'), new Date('2021-12-31'), 'active', 'credit_card'),
-        new Subscription(3, 3, 3, new Date('2021-01-01'), new Date('2021-12-31'), 'canceled', 'credit_card'),
-        new Subscription(4, 4, 4, new Date('2021-01-01'), new Date('2021-12-31'), 'active', 'credit_card'),
-        new Subscription(5, 5, 5, new Date('2021-01-01'), new Date('2021-12-31'), 'canceled', 'credit_card'),
-    ]
 
     async listAllSubscriptions(): Promise<Subscription[]> {
         const query = "SELECT * FROM subscriptions";
@@ -52,6 +39,8 @@ export default class SubscriptionsRepository {
         const query = "SELECT * FROM subscriptions WHERE status = ?";
         const params = [status];
         const subscription = await this.databaseService.select<Subscription>(query, params);
+
+        console.log("subscription encontradas:", subscription)
         return subscription ?? [];
     }
 

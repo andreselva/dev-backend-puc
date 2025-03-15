@@ -7,6 +7,6 @@ export default class GetSubscriptionByStatusUseCase {
     constructor(private readonly subscriptionsRepository: SubscriptionsRepository) { }
 
     async get(status: string) {
-        return this.subscriptionsRepository.getSubscriptionByStatus(status);
+        return await this.subscriptionsRepository.getSubscriptionByStatus(status);
     }
 }
