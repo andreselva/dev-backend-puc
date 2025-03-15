@@ -7,13 +7,13 @@ import { DatabaseService } from "src/Database/DatabaseService";
 export default class CustomerRepository {
     constructor(private readonly db: DatabaseService) { }
 
-    async getCustomer(code: string) {
+    async getCustomer(code: string): Promise<Customer | null> {
         const query = 'SELECT * FROM customers WHERE code = ?';
         const params = [code];
         const customers = await this.db.select<Customer>(query, params);
     
         if (!customers || !Array.isArray(customers) || customers.length === 0) {
-            return [];
+            return null;
         }
     
         return customers[0];

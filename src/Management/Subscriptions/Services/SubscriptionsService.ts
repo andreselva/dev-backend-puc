@@ -27,7 +27,7 @@ export default class SubscriptionsService {
         return this.listSubscriptionUseCase.list();
     }
 
-    createSubscription(dto: SubscriptionDTO) {
+    async createSubscription(dto: SubscriptionDTO) {
         return this.createSubscriptionUseCase.create(dto);
     }
 

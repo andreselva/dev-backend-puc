@@ -6,7 +6,7 @@ import SubscriptionsRepository from "../Repositories/SubscriptionsRepository";
 export default class ListSubscriptionUseCase {
     constructor(private readonly subscriptionRepository: SubscriptionsRepository) { }
 
-    list() {
+    async list() {
         return this.subscriptionRepository.listAllSubscriptions();
     }
 }

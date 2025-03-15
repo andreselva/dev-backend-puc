@@ -21,24 +21,33 @@ export default class PlanRepository {
 
     async getPlans(): Promise<Plan[]> {
         const query = "SELECT * FROM plans;";
-        const plans = await this.databaseService.select(query);
+        const plans = await this.databaseService.select<Plan>(query);
 
         if (!plans) {
             return [];
         }
 
-        return plans as Plan[];
+        return plans;
     }
 
-    getPlanById(id: number) {
-        return PlanRepository.plans.find(Plan => Plan.getCode() === id);
-    }
+    async getPlanById(id: number): Promise<Plan[]> {
+        const query = "SELECT * FROM plans WHERE code = ?";
+        const params = [id];
+        const plan = await this.databaseService.select<Plan>(query, params);
 
-    updatePricePlan(id: number, price: number) {
-        const plan = PlanRepository.plans.find(Plan => Plan.getCode() === id);
-        if (plan) {
-            plan.setPrice(price);
-            return plan;
+        if (!plan) {
+            return [];
         }
+
+        return plan;
+    }
+
+    async updatePricePlan(id: number, price: string): Promise<Plan[]> {
+        const query = "UPDATE plans SET monthlyCost = ? WHERE code = ?";
+        const params = [price, id];
+        await this.databaseService.execute(query, params);
+
+        const plan = await this.getPlanById(id);
+        return plan;
     }
 }

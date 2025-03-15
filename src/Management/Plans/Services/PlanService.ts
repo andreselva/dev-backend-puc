@@ -28,15 +28,15 @@ export default class PlanService {
             return Response.success(plans);
         }
 
-        return Response.notFound(plans, "Nenhum plano encontrado!");
+        return Response.notFound("Nenhum plano encontrado!");
     }
 
-    getPlan(id: number) {
+    async getPlan(id: number) {
         return this.getPlanUseCase.get(id);
     }
 
-    updatePricePlan(dto: UpdatePricePlanDTO) {
-        return this.updatePricePlanUseCase.update(dto);
+    async updatePricePlan(dto: UpdatePricePlanDTO) {
+        return await this.updatePricePlanUseCase.update(dto);
     }
 
 }

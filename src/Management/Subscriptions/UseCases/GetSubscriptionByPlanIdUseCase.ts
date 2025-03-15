@@ -6,7 +6,7 @@ import SubscriptionsRepository from "../Repositories/SubscriptionsRepository";
 export default class GetSubscriptionsByPlanIdUseCase {
     constructor(private readonly subscriptionsRepository: SubscriptionsRepository) { }
 
-    get(planId: string) {
+    async get(planId: string) {
         return this.subscriptionsRepository.getSubscriptionsByPlanId(planId);
     }
 }

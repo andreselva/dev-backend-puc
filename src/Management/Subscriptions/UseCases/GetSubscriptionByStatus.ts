@@ -6,7 +6,7 @@ import SubscriptionsRepository from "../Repositories/SubscriptionsRepository";
 export default class GetSubscriptionByStatusUseCase {
     constructor(private readonly subscriptionsRepository: SubscriptionsRepository) { }
 
-    get(status: string) {
+    async get(status: string) {
         return this.subscriptionsRepository.getSubscriptionByStatus(status);
     }
 }

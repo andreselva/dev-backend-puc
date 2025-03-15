@@ -18,8 +18,13 @@ export default class PlanController {
     }
 
     @Patch('/price')
-    updatePricePlan(@Body() dto: UpdatePricePlanDTO) {
-        const plan = this.planService.updatePricePlan(dto);
-        return Response.success(plan, "Preço do plano atualizado com sucesso!");
+    async updatePricePlan(@Body() dto: UpdatePricePlanDTO) {
+        const plan = await this.planService.updatePricePlan(dto);
+
+        if (plan && Array.isArray(plan) && plan.length > 0) {
+            return Response.success(plan, "Preço do plano atualizado com sucesso!");
+        }
+
+        return Response.badRequest("Erro ao atualizar o preço do plano!");
     }
 }

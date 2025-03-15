@@ -14,7 +14,7 @@ export default class CustomerService {
         return this.listCustomersUseCase.list();
     }
 
-    getCustomer(code: string) {
+    async getCustomer(code: string) {
         return this.getCustomerUseCase.get(code);
     }
 }   

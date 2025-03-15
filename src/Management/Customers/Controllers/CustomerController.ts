@@ -14,7 +14,7 @@ export default class CustomerController {
             return Response.success(customers, "Success");
         }
 
-        return Response.notFound(customers,  "Nenhum cliente encontrado!");
+        return Response.notFound("Nenhum cliente encontrado!");
     }
 
     @Get('/customer/:id')
@@ -25,7 +25,7 @@ export default class CustomerController {
             return Response.success(customer);
         }
 
-        return Response.notFound(customer, "Cliente não encontrado!");
+        return Response.notFound("Cliente não encontrado!");
     }
 
 }

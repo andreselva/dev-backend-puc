@@ -5,7 +5,7 @@ import PlanRepository from "../Repositories/PlanRepository";
 export default class GetPlanUseCase {
     constructor(private readonly planRepository: PlanRepository) {}
 
-    get(id: number) {
+    async get(id: number) {
         return this.planRepository.getPlanById(id);
     }
 }

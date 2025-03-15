@@ -11,26 +11,20 @@ export class DatabaseService implements OnModuleInit, OnModuleDestroy {
     async onModuleInit() {
         try {
             const dbPath = join(cwd(), process.env.NODE_ENV === 'production' ? 'dist' : 'src', 'Database', 'database.sqlite');
-            console.log('Tentando abrir o banco de dados em:', dbPath);
 
             this.db = await open<sqlite3.Database, sqlite3.Statement>({
                 filename: dbPath,
                 driver: sqlite3.Database,
             });
 
-            console.log('Conexão com SQLite bem-sucedida!');
         } catch (error) {
             console.error('Erro ao conectar ao banco de dados:', (error as Error).message);
         }
     }
 
     async select<T>(query: string, params: any[] = []): Promise<T[]> {
-        console.log(query, params);
         if (!this.db) throw new Error('Banco de dados não inicializado');
-        console.log(this.db);
         const result = await this.db.all<T>(query, params);
-        console.log('resultado:', result);
-
         return Array.isArray(result) ? result : [];
     }
 

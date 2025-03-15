@@ -7,14 +7,14 @@ export default class Subscription {
     private readonly status: string;
     private readonly paymentMethod: string;
 
-    constructor(code: number = 10, codePlan: number, codeCustomer: number, startDate: Date = new Date(0), endDate: Date = new Date(0), status: string = 'pending', paymentMethod: string = 'credit_card') {
+    constructor(code: number = 10, codePlan: number, codeCustomer: number, startDate: Date = new Date(0), endDate: Date = new Date(0), paymentMethod: string = 'credit_card', status: string = 'ACTIVE') {
         this.code = code;
         this.codePlan = codePlan;
         this.codeCustomer = codeCustomer;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.status = status;
         this.paymentMethod = paymentMethod;
+        this.status = status;
     }
 
     getCode() {
