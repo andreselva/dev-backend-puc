@@ -44,9 +44,9 @@ export default class SubscriptionsRepository {
         return subscription ?? [];
     }
 
-    async getSubscriptionByClientId(clientId: string): Promise<Subscription[]> {
+    async getSubscriptionByClientId(customerId: string): Promise<Subscription[]> {
         const query = "SELECT * FROM subscriptions WHERE codeCustomer = ?";
-        const params = [clientId];
+        const params = [customerId];
         const subscription = await this.databaseService.select<Subscription>(query, params);
         return subscription ?? [];
     }

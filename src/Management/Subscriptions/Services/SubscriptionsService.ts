@@ -41,8 +41,8 @@ export default class SubscriptionsService {
         return await this.getSubscriptionByStatusUseCase.get(formattedStatus);
     }
 
-    getSubscriptionsByClientId(clientId: string) {
-        return this.getSubscriptionsByClientIdUseCase.get(clientId);
+    async getSubscriptionsByClientId(customerId: string) {
+        return await this.getSubscriptionsByClientIdUseCase.get(customerId);
     }
 
     getSubscriptionsByPlanId(planId: string) {

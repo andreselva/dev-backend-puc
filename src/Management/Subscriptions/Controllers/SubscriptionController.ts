@@ -36,9 +36,15 @@ export default class SubscriptionController {
         return Response.notFound();
     }
 
-    @Get('/client/:clientId')
-    getSubscriptionsByClientId(@Param('clientId') clientId: string) {
-        return this.subscriptionService.getSubscriptionsByClientId(clientId);
+    @Get('/customer/:customerId')
+    async getSubscriptionsByClientId(@Param('customerId') customerId: string) {
+        const subscriptions = await this.subscriptionService.getSubscriptionsByClientId(customerId);
+
+        if (subscriptions && Array.isArray(subscriptions) && subscriptions.length > 0) {
+            return Response.success(subscriptions);
+        }
+
+        return Response.notFound("Nenhuma assinatura encontrada!");
     }
 
     @Get('/plan/:planId')

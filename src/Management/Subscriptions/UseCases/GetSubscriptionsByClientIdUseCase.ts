@@ -6,7 +6,7 @@ import SubscriptionsRepository from "../Repositories/SubscriptionsRepository";
 export default class GetSubscriptionsByClientIdUseCase {
     constructor(private readonly subscriptionsRepository: SubscriptionsRepository) { }
 
-    async get(clientId: string) {
-        return this.subscriptionsRepository.getSubscriptionByClientId(clientId);
+    async get(customerId: string) {
+        return this.subscriptionsRepository.getSubscriptionByClientId(customerId);
     }
 }
