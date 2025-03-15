@@ -6,7 +6,7 @@ import CustomerRepository from "../Repositories/CustomerRepository";
 export default class GetCustomerUseCase {
     constructor(private readonly customerRepository: CustomerRepository) { }
 
-    get(code: string) {
+    async get(code: string) {
         return this.customerRepository.getCustomer(code);
     }
 }

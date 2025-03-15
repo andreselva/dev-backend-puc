@@ -4,9 +4,9 @@ import CustomerRepository from "../Repositories/CustomerRepository";
 @Injectable()
 @Dependencies(CustomerRepository)
 export default class ListCustomersUseCase {
-    constructor(private readonly customerRepository: CustomerRepository) { }
+    constructor(private readonly customerRepository: CustomerRepository) {}
 
-    list() {
+    async list() {
         return this.customerRepository.listAllCustomers();
     }
 }

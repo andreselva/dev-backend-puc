@@ -7,7 +7,7 @@ export default class ListPlansUseCase {
 
   constructor(private readonly planRepository: PlanRepository) { }
 
-  list() {
+  async list() {
     return this.planRepository.getPlans();
   }
 }

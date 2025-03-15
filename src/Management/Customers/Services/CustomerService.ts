@@ -8,7 +8,7 @@ export default class CustomerService {
     constructor(
         private readonly listCustomersUseCase: ListCustomersUseCase,
         private readonly getCustomerUseCase: GetCustomerUseCase
-    ) { }
+    ) {}
 
     listCustomers() {
         return this.listCustomersUseCase.list();
@@ -17,4 +17,4 @@ export default class CustomerService {
     getCustomer(code: string) {
         return this.getCustomerUseCase.get(code);
     }
-}
+}   

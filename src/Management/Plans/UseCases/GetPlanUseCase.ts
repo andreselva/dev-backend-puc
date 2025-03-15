@@ -6,6 +6,6 @@ export default class GetPlanUseCase {
     constructor(private readonly planRepository: PlanRepository) {}
 
     get(id: number) {
-        return this.planRepository.getPlan(id);
+        return this.planRepository.getPlanById(id);
     }
 }

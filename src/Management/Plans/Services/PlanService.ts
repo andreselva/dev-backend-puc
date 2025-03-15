@@ -5,6 +5,7 @@ import CreatePlanDTO from "../DTO/CreatePlanDTO";
 import GetPlanUseCase from "../UseCases/GetPlanUseCase";
 import UpdatePricePlanUseCase from "../UseCases/UpdatePricePlanUseCase";
 import UpdatePricePlanDTO from "../DTO/UpdatePricePlanDTO";
+import Response from "src/Response/Response";
 
 @Injectable()
 @Dependencies(CreatePlanUseCase, ListPlansUseCase, GetPlanUseCase, UpdatePricePlanUseCase)
@@ -20,8 +21,14 @@ export default class PlanService {
         return this.createPlanUseCase.create(dto)
     }
 
-    listPlans() {
-        return this.listPlansUseCase.list();
+    async listPlans() {
+        const plans = await this.listPlansUseCase.list();
+        
+        if (plans && Array.isArray(plans) && plans.length > 0) {
+            return Response.success(plans);
+        }
+
+        return Response.notFound(plans, "Nenhum plano encontrado!");
     }
 
     getPlan(id: number) {

@@ -13,7 +13,7 @@ export default class CustomerRepository {
         const customers = await this.db.select<Customer>(query, params);
     
         if (!customers || !Array.isArray(customers) || customers.length === 0) {
-            throw new Error('Cliente não encontrado para o código fornecido!');
+            return [];
         }
     
         return customers[0];

@@ -5,18 +5,16 @@ import UpdatePricePlanDTO from "../DTO/UpdatePricePlanDTO";
 import Response from "src/Response/Response";
 @Controller('plans')
 export default class PlanController {
-    constructor(
-        private readonly planService: PlanService
-    ) { }
-
-    @Post()
-    create(@Body() dto: CreatePlanDTO) {
-        return this.planService.createPlan(dto);
-    }
-
+    constructor(private readonly planService: PlanService) { }
+    
     @Get()
     list() {
         return this.planService.listPlans();
+    }
+    
+    @Post()
+    create(@Body() dto: CreatePlanDTO) {
+        return this.planService.createPlan(dto);
     }
 
     @Patch('/price')
