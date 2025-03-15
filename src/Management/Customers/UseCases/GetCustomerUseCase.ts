@@ -7,6 +7,6 @@ export default class GetCustomerUseCase {
     constructor(private readonly customerRepository: CustomerRepository) { }
 
     async get(code: string) {
-        return this.customerRepository.getCustomer(code);
+        return await this.customerRepository.getCustomer(code);
     }
 }

@@ -7,6 +7,6 @@ export default class ListSubscriptionUseCase {
     constructor(private readonly subscriptionRepository: SubscriptionsRepository) { }
 
     async list() {
-        return this.subscriptionRepository.listAllSubscriptions();
+        return await this.subscriptionRepository.listAllSubscriptions();
     }
 }

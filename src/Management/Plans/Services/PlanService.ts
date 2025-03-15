@@ -1,7 +1,6 @@
 import { Dependencies, Injectable } from "@nestjs/common";
 import ListPlansUseCase from "../UseCases/ListPlansUseCase";
 import CreatePlanUseCase from "../UseCases/CreatePlanUseCase";
-import CreatePlanDTO from "../DTO/CreatePlanDTO";
 import GetPlanUseCase from "../UseCases/GetPlanUseCase";
 import UpdatePricePlanUseCase from "../UseCases/UpdatePricePlanUseCase";
 import UpdatePricePlanDTO from "../DTO/UpdatePricePlanDTO";
@@ -16,10 +15,6 @@ export default class PlanService {
         private readonly getPlanUseCase: GetPlanUseCase,
         private readonly updatePricePlanUseCase: UpdatePricePlanUseCase
     ) { }
-
-    createPlan(dto: CreatePlanDTO) {
-        return this.createPlanUseCase.create(dto)
-    }
 
     async listPlans() {
         const plans = await this.listPlansUseCase.list();

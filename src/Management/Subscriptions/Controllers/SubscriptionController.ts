@@ -11,8 +11,8 @@ export default class SubscriptionController {
     ) { }
 
     @Get()
-    listSubscriptions() {
-        return this.subscriptionService.listSubscriptions();
+    async listSubscriptions() {
+        return await this.subscriptionService.listSubscriptions();
     }
 
     @Post()

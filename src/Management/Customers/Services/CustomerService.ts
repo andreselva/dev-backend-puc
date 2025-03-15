@@ -10,8 +10,8 @@ export default class CustomerService {
         private readonly getCustomerUseCase: GetCustomerUseCase
     ) {}
 
-    listCustomers() {
-        return this.listCustomersUseCase.list();
+    async listCustomers() {
+        return await this.listCustomersUseCase.list();
     }
 
     async getCustomer(code: string) {

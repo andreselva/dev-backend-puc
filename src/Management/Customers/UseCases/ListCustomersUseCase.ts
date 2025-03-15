@@ -7,6 +7,6 @@ export default class ListCustomersUseCase {
     constructor(private readonly customerRepository: CustomerRepository) {}
 
     async list() {
-        return this.customerRepository.listAllCustomers();
+        return await this.customerRepository.listAllCustomers();
     }
 }

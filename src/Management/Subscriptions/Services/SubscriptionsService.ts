@@ -28,7 +28,7 @@ export default class SubscriptionsService {
     }
 
     async createSubscription(dto: SubscriptionDTO) {
-        return this.createSubscriptionUseCase.create(dto);
+        return await this.createSubscriptionUseCase.create(dto);
     }
 
     async getSubscriptionByStatus(status: string) {

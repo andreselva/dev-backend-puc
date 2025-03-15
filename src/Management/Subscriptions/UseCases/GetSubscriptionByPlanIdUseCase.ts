@@ -7,6 +7,6 @@ export default class GetSubscriptionsByPlanIdUseCase {
     constructor(private readonly subscriptionsRepository: SubscriptionsRepository) { }
 
     async get(planId: string) {
-        return this.subscriptionsRepository.getSubscriptionsByPlanId(planId);
+        return await this.subscriptionsRepository.getSubscriptionsByPlanId(planId);
     }
 }
