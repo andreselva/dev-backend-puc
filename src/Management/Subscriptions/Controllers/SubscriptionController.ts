@@ -48,7 +48,13 @@ export default class SubscriptionController {
     }
 
     @Get('/plan/:planId')
-    getSubscriptionsByPlanId(@Param('planId') planId: string) {
-        return this.subscriptionService.getSubscriptionsByPlanId(planId);
+    async getSubscriptionsByPlanId(@Param('planId') planId: string) {
+        const subscriptions = await this.subscriptionService.getSubscriptionsByPlanId(planId);
+
+        if (subscriptions && Array.isArray(subscriptions) && subscriptions.length > 0) {
+            return Response.success(subscriptions);
+        }
+
+        return Response.notFound("Nenhuma assinatura encontrada!");
     }
 }
