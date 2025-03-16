@@ -1,28 +1,31 @@
 CREATE TABLE IF NOT EXISTS plans (
     id INTEGER PRIMARY KEY,
-    code BIGINT NOT NULL,
-    monthlyCost DECIMAL(10,2) NOT NULL,
-    date DATE,
-    description VARCHAR(50),
-    dateLastPayment DATETIME
-);
-
-CREATE TABLE IF NOT EXISTS subscriptions (
-    id INTEGER PRIMARY KEY,
-    code BIGINT NOT NULL,
-    codePlan BIGINT NOT NULL,
-    codeCustomer BIGINT NOT NULL,
-    startDate DATE,
-    endDate DATE,
-    status TEXT CHECK (status IN ('ACTIVE', 'INACTIVE', 'EXPIRED', 'SUSPENDED', 'CANCELED', 'TRIAL')) NOT NULL,
-    paymentMethod TEXT CHECK (paymentMethod IN ('credit_card', 'pix', 'debit_card', 'boleto')) NOT NULL
+    code BIGINT NOT NULL UNIQUE,
+    monthlyCost DECIMAL(10, 2) NOT NULL,
+    date DATE NOT NULL,
+    description VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS customers (
     id INTEGER PRIMARY KEY,
-    code BIGINT NOT NULL,
-    name VARCHAR(50),
-    email VARCHAR(50)
+    code BIGINT NOT NULL UNIQUE,
+    name VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS subscriptions (
+    id INTEGER PRIMARY KEY,
+    code BIGINT NOT NULL UNIQUE,
+    codePlan BIGINT NOT NULL,
+    codeCustomer BIGINT NOT NULL,
+    description TEXT NOT NULL,
+    finalCost DECIMAL(10, 2) NOT NULL,
+    startDate DATE NOT NULL,
+    endDate DATE NOT NULL,
+    status TEXT CHECK (status IN ('ACTIVE', 'INACTIVE', 'EXPIRED', 'SUSPENDED', 'CANCELED', 'TRIAL')) NOT NULL,
+    dateLastPayment TEXT DEFAULT NULL,
+    FOREIGN KEY (codePlan) REFERENCES plans(code),
+    FOREIGN KEY (codeCustomer) REFERENCES customers(code)
 );
 
 INSERT INTO customers (code, name, email) VALUES
@@ -37,18 +40,16 @@ INSERT INTO customers (code, name, email) VALUES
 (1009, 'André Rocha', 'andre.rocha@email.com'),
 (1010, 'Camila Barbosa', 'camila.barbosa@email.com');
 
-INSERT INTO plans (code, monthlyCost, date, description, dateLastPayment) VALUES
-(2001, 49.90, '2024-01-01', 'Plano Básico', NULL),
-(2002, 79.90, '2024-01-01', 'Plano Padrão', NULL),
-(2003, 99.90, '2024-01-01', 'Plano Premium', NULL),
-(2004, 149.90, '2024-01-01', 'Plano Empresarial', NULL),
-(2005, 199.90, '2024-01-01', 'Plano Ultra', NULL);
+INSERT INTO plans (code, monthlyCost, date, description) VALUES
+(2001, 49.90, '2024-01-01', 'Plano Básico'),
+(2002, 79.90, '2024-01-01', 'Plano Padrão'),
+(2003, 99.90, '2024-01-01', 'Plano Premium'),
+(2004, 149.90, '2024-01-01', 'Plano Empresarial'),
+(2005, 199.90, '2024-01-01', 'Plano Ultra');
 
-INSERT INTO subscriptions (code, codePlan, codeCustomer, startDate, endDate, status, paymentMethod) VALUES
-(3001, 2001, 1001, '2024-02-01', '2025-02-01', 'ACTIVE', 'credit_card'),
-(3002, 2002, 1003, '2024-02-05', '2025-02-05', 'ACTIVE', 'pix'),
-(3003, 2003, 1005, '2024-03-01', '2025-03-01', 'INACTIVE', 'boleto'),
-(3004, 2004, 1007, '2024-03-10', '2025-03-10', 'SUSPENDED', 'debit_card'),
-(3005, 2005, 1009, '2024-04-01', '2025-04-01', 'CANCELED', 'credit_card');
-
-
+INSERT INTO subscriptions (code, codePlan, codeCustomer, description, finalCost, startDate, endDate, status) VALUES
+(3001, 2001, 1001, 'Descrição padrão.', 20.99, '2024-02-01', '2025-02-01', 'ACTIVE'),
+(3002, 2002, 1003, 'Descrição padrão.', 20.99, '2024-02-01', '2025-02-01', 'ACTIVE'),
+(3003, 2003, 1005, 'Descrição padrão.', 20.99, '2024-02-01', '2025-02-01', 'INACTIVE'),
+(3004, 2004, 1007, 'Descrição padrão.', 20.99, '2024-02-01', '2025-02-01', 'SUSPENDED'),
+(3005, 2005, 1009, 'Descrição padrão.', 20.99, '2024-02-01', '2025-02-01', 'CANCELED');

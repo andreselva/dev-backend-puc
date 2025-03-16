@@ -23,9 +23,10 @@ export default class CreateSubscriptionUseCase {
             return null;
         }
         
+        const code = await this.subscriptionRepository.getLastCode();
         const startDate = this.dateHandler.setStartDate();
         const endDate =  this.dateHandler.setEndDate();
-        const subscription = new Subscription(parseInt(dto.code), parseInt(dto.codePlan), parseInt(dto.codeCustomer), startDate, endDate, dto.paymentMethod);
+        const subscription = new Subscription(code, parseInt(dto.codePlan), parseInt(dto.codeCustomer), dto.description, dto.finalCost, startDate, endDate);
         return this.subscriptionRepository.createSubscription(subscription);
     }
 

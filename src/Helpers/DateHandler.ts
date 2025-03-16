@@ -24,7 +24,7 @@ export default class DateHandler {
 
     setEndDate(): Date {
         this.endDate = new Date(this.startDate);
-        this.endDate.setDate(this.endDate.getDate() + 360);
+        this.endDate.setDate(this.endDate.getDate() + 365);
         return this.endDate;
     }
 

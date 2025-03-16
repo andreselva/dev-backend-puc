@@ -1,7 +1,6 @@
 import { Dependencies, Injectable } from "@nestjs/common";
 import Subscription from "../Entity/Subscription";
 import { DatabaseService } from "src/Database/DatabaseService";
-
 @Injectable()
 @Dependencies(DatabaseService)
 export default class SubscriptionsRepository {
@@ -14,17 +13,20 @@ export default class SubscriptionsRepository {
     }
 
     async createSubscription(subscription: Subscription): Promise<Subscription[] | null> {
-        console.log("caiu na criação")
-        const query = "INSERT INTO subscriptions (code, codePlan, codeCustomer, startDate, endDate, status, paymentMethod) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        const query = "INSERT INTO subscriptions (code, codePlan, codeCustomer, description, finalCost, startDate, endDate, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         const params = [
             subscription.getCode(),
             subscription.getCodePlan(),
             subscription.getCodeCustomer(),
+            subscription.getDescription(),
+            subscription.getFinalCost(),
             subscription.getStartDate(),
             subscription.getEndDate(),
             subscription.getStatus(),
-            subscription.getPaymentMethod()
         ];
+
+        console.log(query);
+        console.log(params);
 
         const result = await this.databaseService.insert(query, params);
 
@@ -39,8 +41,6 @@ export default class SubscriptionsRepository {
         const query = "SELECT * FROM subscriptions WHERE status = ?";
         const params = [status];
         const subscription = await this.databaseService.select<Subscription>(query, params);
-
-        console.log("subscription encontradas:", subscription)
         return subscription ?? [];
     }
 
@@ -56,5 +56,13 @@ export default class SubscriptionsRepository {
         const params = [planId];
         const subscription = await this.databaseService.select<Subscription>(query, params);
         return subscription ?? [];
+    }
+
+    async getLastCode(): Promise<number> {
+        const query = "SELECT MAX(code) as maxCode FROM subscriptions";
+        const result = await this.databaseService.select<{ maxCode: number }>(query);
+    
+        const code = result[0]?.maxCode ?? 0;
+        return code + 1;
     }
 }
