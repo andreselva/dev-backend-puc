@@ -5,7 +5,6 @@ import PlanService from './Management/Plans/Services/PlanService';
 import PlanController from './Management/Plans/Controllers/PlanController';
 import ListPlansUseCase from './Management/Plans/UseCases/ListPlansUseCase';
 import PlanRepository from './Management/Plans/Repositories/PlanRepository';
-import CreatePlanUseCase from './Management/Plans/UseCases/CreatePlanUseCase';
 import { LoggerMiddleware } from './Logger/LoggerMiddleware';
 import CustomerController from './Management/Customers/Controllers/CustomerController';
 import CustomerRepository from './Management/Customers/Repositories/CustomerRepository';
@@ -27,7 +26,6 @@ import { DatabaseService } from './Database/DatabaseService';
 const planUseCases = [
   GetPlanUseCase,
   ListPlansUseCase,
-  CreatePlanUseCase,
   UpdatePricePlanUseCase,
 ];
 
