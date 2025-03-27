@@ -1,6 +1,7 @@
 import { Dependencies, Injectable } from "@nestjs/common";
 import Subscription from "../Entity/Subscription";
 import { DatabaseService } from "src/Database/DatabaseService";
+import PaymentSubscriptionDTO from "../DTO/PaymentSubscriptionDTO";
 @Injectable()
 @Dependencies(DatabaseService)
 export default class SubscriptionsRepository {
@@ -65,4 +66,15 @@ export default class SubscriptionsRepository {
         const code = result[0]?.maxCode ?? 0;
         return code + 1;
     }
+
+    async updatePaymentSubscription(payment: PaymentSubscriptionDTO) {
+        const query = "UPDATE subscriptions SET valorPago = ?, dateLastPayment = ? WHERE code = ?";
+        const params = [
+            payment.valorPago,
+            payment.dataPagamento,
+            payment.codAssinatura
+        ];
+        await this.databaseService.execute(query, params);
+    }
+
 }

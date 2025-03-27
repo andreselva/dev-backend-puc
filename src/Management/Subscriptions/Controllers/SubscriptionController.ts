@@ -2,6 +2,8 @@ import { Body, Controller, Dependencies, Get, Param, Post } from "@nestjs/common
 import SubscriptionsService from "../Services/SubscriptionsService";
 import SubscriptionDTO from "../DTO/SubscriptionDTO";
 import Response from "src/Response/Response";
+import { EventPattern, Payload } from "@nestjs/microservices";
+import PaymentSubscriptionDTO from "../DTO/PaymentSubscriptionDTO";
 
 @Dependencies(SubscriptionsService)
 @Controller('subscriptions')
@@ -56,5 +58,11 @@ export default class SubscriptionController {
         }
 
         return Response.notFound("Nenhuma assinatura encontrada!");
+    }
+
+    @EventPattern('payment_created')
+    async handlePayment(@Payload() data: PaymentSubscriptionDTO) {
+        await this.subscriptionService.updatePaymentSubscription(data);
+        console.log('Pagamento recebido:', data);
     }
 }

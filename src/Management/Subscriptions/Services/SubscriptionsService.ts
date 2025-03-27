@@ -5,6 +5,8 @@ import SubscriptionDTO from "../DTO/SubscriptionDTO";
 import GetSubscriptionByStatusUseCase from "../UseCases/GetSubscriptionByStatus";
 import GetSubscriptionsByClientIdUseCase from "../UseCases/GetSubscriptionsByClientIdUseCase";
 import GetSubscriptionsByPlanIdUseCase from "../UseCases/GetSubscriptionByPlanIdUseCase";
+import UpdatePaymentSubscriptionUseCase from "../UseCases/UpdatePaymentSubscriptionUseCase";
+import PaymentSubscriptionDTO from "../DTO/PaymentSubscriptionDTO";
 
 @Injectable()
 @Dependencies(
@@ -12,7 +14,8 @@ import GetSubscriptionsByPlanIdUseCase from "../UseCases/GetSubscriptionByPlanId
     CreateSubscriptionUseCase,
     GetSubscriptionByStatusUseCase,
     GetSubscriptionsByClientIdUseCase,
-    GetSubscriptionsByPlanIdUseCase
+    GetSubscriptionsByPlanIdUseCase,
+    UpdatePaymentSubscriptionUseCase
 )
 export default class SubscriptionsService {
     constructor(
@@ -20,7 +23,8 @@ export default class SubscriptionsService {
         private readonly createSubscriptionUseCase: CreateSubscriptionUseCase,
         private readonly getSubscriptionByStatusUseCase: GetSubscriptionByStatusUseCase,
         private readonly getSubscriptionsByClientIdUseCase: GetSubscriptionsByClientIdUseCase,
-        private readonly getSubscriptionsByPlanIdUseCase: GetSubscriptionsByPlanIdUseCase
+        private readonly getSubscriptionsByPlanIdUseCase: GetSubscriptionsByPlanIdUseCase,
+        private readonly updatePaymentSubscriptionUseCase: UpdatePaymentSubscriptionUseCase
     ) { };
 
     async listSubscriptions() {
@@ -47,5 +51,9 @@ export default class SubscriptionsService {
 
     async getSubscriptionsByPlanId(planId: string) {
         return await this.getSubscriptionsByPlanIdUseCase.get(planId);
+    }
+
+    async updatePaymentSubscription(payment: PaymentSubscriptionDTO) {
+        await this.updatePaymentSubscriptionUseCase.update(payment);
     }
 }

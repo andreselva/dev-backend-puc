@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS subscriptions (
     endDate DATE NOT NULL,
     status TEXT CHECK (status IN ('ACTIVE', 'INACTIVE', 'EXPIRED', 'SUSPENDED', 'CANCELED', 'TRIAL')) NOT NULL,
     dateLastPayment TEXT DEFAULT NULL,
+    valorPago DECIMAL(10,2) NULL,
     FOREIGN KEY (codePlan) REFERENCES plans(code),
     FOREIGN KEY (codeCustomer) REFERENCES customers(code)
 );

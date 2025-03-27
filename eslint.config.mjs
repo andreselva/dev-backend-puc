@@ -32,7 +32,7 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-argument': 'warn',
       '@typescript-eslint/no-unsafe-call': 'off',
       'prettier/prettier': 'off',
-      '@typescript-eslint/no-unsafe-assignment': 'off', // Adicione esta linha
+      '@typescript-eslint/no-unsafe-assignment': 'off',
     },
   },
 );
